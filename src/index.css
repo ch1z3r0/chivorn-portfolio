@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream: #f5f4f0;
+  --color-cream-dark: #0f0e0c;
+  --color-ink: #17150f;
+  --color-ink-dark: #f2f1ec;
+  --color-accent: #c1610e;
+  --color-accent-2: #1f7a5c;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased dark:bg-cream-dark dark:text-ink-dark;
+    margin: 0;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, currentColor 6%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, currentColor 6%, transparent) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: white;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer components {
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+
+  .panel {
+    @apply rounded-md border border-black/10 dark:border-white/10 p-5 sm:p-6 transition-colors hover:border-accent/60;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-accent-2;
+  }
+
+  .path-suffix {
+    @apply font-mono text-lg sm:text-xl font-normal text-black/40 dark:text-white/40;
+  }
+}
